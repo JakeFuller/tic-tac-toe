@@ -92,6 +92,17 @@ const displayController = (() => {
   let divId = 0;
   let findDiv = 0;
   const clickables = document.getElementsByClassName("gridElement");
+  const startBtn = document.getElementsByClassName("start");
+
+  const startListen = () => {
+    startBtn[0].addEventListener("click", startGame);
+  };
+
+  const startGame = () => {
+    startBtn[0].removeEventListener("click", startGame);
+    startBtn[0].className = "hidden";
+    displayController.setClickables();
+  };
 
   // Turn the game "buttons" on
   const setClickables = () => {
@@ -134,7 +145,7 @@ const displayController = (() => {
       }
     }
   };
-  return { paintBoard, setClickables, unsetClickables };
+  return { paintBoard, setClickables, unsetClickables, startListen };
 })();
 
 const Player = (name, symbol) => {
@@ -151,4 +162,5 @@ const Player = (name, symbol) => {
 const p1 = Player("Jake", "X");
 const p2 = Player("AI", "O");
 
-displayController.setClickables();
+displayController.startListen();
+// displayController.setClickables();
