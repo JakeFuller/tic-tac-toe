@@ -8,6 +8,10 @@ header {
   height: 100px;
 }
 
+.hidden {
+  display: none;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -20,7 +24,6 @@ header {
   grid-template-rows: repeat(3, 200px);
   gap: 5px;
   place-self: center;
-
   background: black;
 }
 
@@ -32,21 +35,21 @@ header {
   background: white;
 }
 
-/* #gameBoard {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-  grid-column: 2;
-  place-content: center;
-  place-items: center;
-  border: 2px solid black;
-  width: 700px;
-  height: 700px;
+.x {
+  color: red;
 }
 
-.gridElement {
-  text-align: center;
-  font-size: 100px;
-  width: 200px;
-  height: 200px;
-} */
+.o {
+  color: blue;
+}
+
+.start {
+  position: absolute;
+  place-self: center;
+  font-size: 40px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 40px;
+  background: purple;
+  color: white;
+}
