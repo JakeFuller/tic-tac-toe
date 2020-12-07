@@ -52,6 +52,23 @@ const runGame = (() => {
       displayController.unsetClickables();
       console.log("Winner!");
       handleWin();
+    } else {
+      checkTie();
+    }
+  };
+  //  Checks if all board[i][j] is X or O, if so, declare draw
+  const checkTie = () => {
+    iterable = [];
+    board = gameBoard.board;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i].every((e) => e == "X" || e == "O")) {
+        iterable.push(true);
+      } else {
+        iterable.push(false);
+      }
+    }
+    if (iterable.every((e) => e === true)) {
+      handleTie();
     }
   };
 
@@ -61,6 +78,10 @@ const runGame = (() => {
     } else {
       console.log(`${p2.getName()} wins!`);
     }
+  };
+
+  const handleTie = () => {
+    console.log("Draw!");
   };
 
   return { handleTurn };
