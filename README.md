@@ -7,7 +7,7 @@ Concepts learned:
 
 To-Do:
 
-- Add a start and restart button to activate the game
+- Add a restart button to replay same type of game
 - Add simple AI opponent capabilities
 - Add decision for Player Vs. Player or Player Vs. AI.
 - Add page elements for end of game
