@@ -8,9 +8,17 @@
 </head>
 <body>
     <div class="wrapper">
-        <header>
-        </header>
-        <section id=gameBoard>
+        <header id="header"></header>
+        <section id="instructions">
+           <p class = "instruction-text">Select game mode and enter name(s). Then press START to begin.</p>
+           <form class="player-select">
+               <label for="p1Name">Player 1: </label>
+               <input type="text" name="p1Name" id="p1-name">
+               <label for="p2Name">Player 2: </label>
+               <input type="text" name="p2Name" id="p2-name">
+           </form>
+        </section>
+        <section id="gameBoard">
             <button class="button start">Start</button>
             <div class ="gridElement" id = "A1"></div>
             <div class ="gridElement" id = "A2"></div>
