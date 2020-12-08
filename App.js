@@ -11,6 +11,14 @@ const runGame = (() => {
   board = gameBoard.board;
   round = 1;
   symbol = "";
+  let p1 = "";
+  let p2 = "";
+
+  const initPlayers = (p1Name, p1Symbol, p2Name, p2Symbol) => {
+    p1 = Player(p1Name, p1Symbol);
+    p2 = Player(p2Name, p2Symbol);
+  };
+
   const handleTurn = (gridElement) => {
     if (round % 2 != 0) {
       symbol = p1.getSymbol();
@@ -74,17 +82,20 @@ const runGame = (() => {
 
   const handleWin = () => {
     if (round % 2 != 0) {
+      displayController.winScreen(p1.getName(), true);
       console.log(`${p1.getName()} wins!`);
     } else {
+      displayController.winScreen(p2.getName(), true);
       console.log(`${p2.getName()} wins!`);
     }
   };
 
   const handleTie = () => {
+    displayController.winScreen(p1.getName(), false);
     console.log("Draw!");
   };
 
-  return { handleTurn };
+  return { handleTurn, initPlayers };
 })();
 
 const displayController = (() => {
@@ -93,6 +104,10 @@ const displayController = (() => {
   let findDiv = 0;
   const clickables = document.getElementsByClassName("gridElement");
   const startBtn = document.getElementsByClassName("start");
+  const instructions = document.getElementById("instructions");
+
+  let p1Name = document.getElementById("p1-name").value;
+  let p2Name = document.getElementById("p2-name").value;
 
   const startListen = () => {
     startBtn[0].addEventListener("click", startGame);
@@ -101,6 +116,8 @@ const displayController = (() => {
   const startGame = () => {
     startBtn[0].removeEventListener("click", startGame);
     startBtn[0].className = "hidden";
+    instructions.className = "hidden";
+    runGame.initPlayers(p1Name, "X", p2Name, "O");
     displayController.setClickables();
   };
 
@@ -126,6 +143,15 @@ const displayController = (() => {
     getDiv.textContent = `${symbol}`;
   };
 
+  const winScreen = (player, win) => {
+    const header = document.getElementById("header");
+    if (win === true) {
+      header.textContent = `${player} wins!`;
+    } else {
+      header.textContent = "Tie Game!";
+    }
+  };
+
   // Used to fill entire grid with 1 character -- Possible end-of-game display
   const fillBoard = (symbol) => {
     for (i = 0; i < board.length; i++) {
@@ -145,7 +171,7 @@ const displayController = (() => {
       }
     }
   };
-  return { paintBoard, setClickables, unsetClickables, startListen };
+  return { paintBoard, setClickables, unsetClickables, startListen, winScreen };
 })();
 
 const Player = (name, symbol) => {
@@ -159,8 +185,7 @@ const Player = (name, symbol) => {
   return { getName, getSymbol, takeTurn };
 };
 
-const p1 = Player("Jake", "X");
-const p2 = Player("AI", "O");
+// const p1 = Player("Jake", "X");
+// const p2 = Player("AI", "O");
 
 displayController.startListen();
-// displayController.setClickables();
